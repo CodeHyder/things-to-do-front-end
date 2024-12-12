@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 const CreateTask = ({ addTask }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [completed, setCompleted] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
@@ -30,7 +29,7 @@ const CreateTask = ({ addTask }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const taskData = { title, description, completed };
+    const taskData = { title, description };
 
     try {
       if (id) {
@@ -43,39 +42,33 @@ const CreateTask = ({ addTask }) => {
     } catch (error) {
       console.error('Erro ao salvar tarefa:', error);
     }
+    setTitle(""); // Limpa o campo título
+    setDescription(""); // Limpa o campo descrição
   };
 
   return (
-    <div class="border border-red-500">
+    <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Título:</label>
-          <input
-            class="text-black"
+          <label className="block text-gray-700 font-medium mb-2">Título:</label>
+          <input 
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
+            className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
           />
         </div>
         <div>
-          <label>Descrição:</label>
-          <input
-            class="text-black"
+          <label className="block text-gray-700 font-medium mb-2">Descrição:</label>
+          <input 
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
+            className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"  
           />
         </div>
-        <div>
-          <label>Concluída:</label>
-          <input
-            type="checkbox"
-            checked={completed}
-            onChange={() => setCompleted(!completed)}
-          />
-        </div>
-        <button class="bg-white text-black" type="submit">Criar Tarefa</button>
+        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition my-7" type="submit">Criar Tarefa</button>
       </form>
     </div>
   );

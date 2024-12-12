@@ -1,19 +1,29 @@
-// components/TaskList.js
-import TaskItem from './TaskItem';
+import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, loading, error, onDelete }) => {
-  if (loading) return <p>Carregando tarefas...</p>;
-  if (error) return <p>{error}</p>;
+const TaskList = ({ tasks, loading, error, onDelete, onStatusChange }) => {
+  if (loading) {
+    return <p className="text-gray-500">Carregando tarefas...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-500">Erro ao carregar tarefas: {error}</p>;
+  }
+
+  if (!tasks.length) {
+    return <p className="text-gray-500">Não há coisas para fazer :)</p>;
+  }
 
   return (
-    <div>
-      <h1>Lista de Tarefas</h1>
-      <ul>
-        {tasks.map((task) => (
-          <TaskItem key={`task-${task._id}`} task={task} onDelete={onDelete} />
-        ))}
-      </ul>
-    </div>
+    <ul className="space-y-3">
+      {tasks.map((task) => (
+        <TaskItem
+          key={`task-${task._id}`}
+          task={task}
+          onDelete={onDelete}
+          onStatusChange={onStatusChange}
+        />
+      ))}
+    </ul>
   );
 };
 

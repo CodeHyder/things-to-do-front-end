@@ -31,11 +31,24 @@ const useTasks = () => {
     }
   };
 
+  const updateTaskStatus = async (id, newStatus) => {
+    try {
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, { completed: newStatus });
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === id ? { ...task, completed: newStatus } : task
+        )
+      );
+    } catch (error) {
+      console.error('Erro ao atualizar status da tarefa:', error);
+    }
+  };
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  return { tasks, loading, error, addTask, deleteTask, fetchTasks };
+  return { tasks, loading, error, addTask, deleteTask, updateTaskStatus };
 };
 
 export default useTasks;
