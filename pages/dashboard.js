@@ -22,7 +22,7 @@ const Dashboard = () => {
         <div className="min-h-screen bg-gray-100 p-6">
              <button
                 onClick={() => logout()}
-                class="bg-black text-white hover:bg-black hover:bg-opacity-80 cursor-pointer rounded-none px-4 py-2 w-24 h-10 font-bold text-sm">
+                className="bg-black text-white hover:bg-black hover:bg-opacity-80 cursor-pointer rounded-none px-4 py-2 w-24 h-10 font-bold text-sm">
                 Sair
             </button>
             <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
