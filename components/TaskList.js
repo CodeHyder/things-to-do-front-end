@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, loading, error, onDelete, onStatusChange }) => {
+const TaskList = ({ tasks, loading, error, onDelete, onToggleStatus }) => {
   if (loading) {
     return <p className="text-gray-500">Carregando tarefas...</p>;
   }
@@ -20,7 +20,7 @@ const TaskList = ({ tasks, loading, error, onDelete, onStatusChange }) => {
           key={`task-${task._id}`}
           task={task}
           onDelete={onDelete}
-          onStatusChange={onStatusChange}
+          onToggleStatus={onToggleStatus}
         />
       ))}
     </ul>

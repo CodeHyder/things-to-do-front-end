@@ -9,7 +9,13 @@ const useTasks = () => {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`);
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('Token não encontrado. Faça login novamente.');
+
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       setTasks(response.data);
     } catch (err) {
       setError('Erro ao buscar tarefas.');
@@ -18,26 +24,44 @@ const useTasks = () => {
     }
   };
 
-  const addTask = (newTask) => {
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+  const addTask = async (taskData) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, taskData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      setTasks((prevTasks) => [...prevTasks, response.data]);
+    } catch (error) {
+      console.error('Erro ao adicionar tarefa:', error);
+    }
   };
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`);
+      const token = localStorage.getItem('token');
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error('Erro ao deletar a tarefa:', error);
     }
   };
 
-  const updateTaskStatus = async (id, newStatus) => {
+  const toggleTaskStatus = async (id) => {
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, { completed: newStatus });
+      const token = localStorage.getItem('token');
+      const taskToUpdate = tasks.find((task) => task._id === id);
+      const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
+
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, updatedTask, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
       setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task._id === id ? { ...task, completed: newStatus } : task
-        )
+        prevTasks.map((task) => (task._id === id ? updatedTask : task))
       );
     } catch (error) {
       console.error('Erro ao atualizar status da tarefa:', error);
@@ -48,7 +72,7 @@ const useTasks = () => {
     fetchTasks();
   }, []);
 
-  return { tasks, loading, error, addTask, deleteTask, updateTaskStatus };
+  return { tasks, loading, error, addTask, deleteTask, toggleTaskStatus };
 };
 
 export default useTasks;

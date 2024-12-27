@@ -4,7 +4,7 @@ import CreateTask from '../components/CreateTask';
 import '../src/app/globals.css';
 
 const Home = () => {
-  const { tasks, loading, error, addTask, deleteTask, updateTaskStatus } = useTasks();
+  const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus } = useTasks();
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -16,7 +16,7 @@ const Home = () => {
           loading={loading}
           error={error}
           onDelete={deleteTask}
-          onStatusChange={updateTaskStatus}
+          onToggleStatus={toggleTaskStatus}
         />
       </div>
     </div>
