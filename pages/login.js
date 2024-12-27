@@ -1,4 +1,3 @@
-// pages/login.js
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
@@ -18,7 +17,7 @@ export default function Login() {
       const { token } = response.data;
       localStorage.setItem('token', token);
 
-      router.push('/');
+      router.push('/dashboard');
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Erro ao realizar login.');
     }

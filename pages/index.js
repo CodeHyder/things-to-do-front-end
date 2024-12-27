@@ -1,26 +1,19 @@
-import useTasks from '../hooks/UseTasks';
-import TaskList from '../components/TaskList';
-import CreateTask from '../components/CreateTask';
-import '../src/app/globals.css';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const Home = () => {
-  const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus } = useTasks();
+  const router = useRouter();
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h1>
-        <CreateTask addTask={addTask} />
-        <TaskList
-          tasks={tasks}
-          loading={loading}
-          error={error}
-          onDelete={deleteTask}
-          onToggleStatus={toggleTaskStatus}
-        />
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push('/dashboard');
+    } else {
+      router.push('/login'); 
+    }
+  }, []);
+
+  return null;
 };
 
 export default Home;
