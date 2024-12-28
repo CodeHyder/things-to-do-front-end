@@ -1,10 +1,8 @@
-
 import useTasks from '../hooks/UseTasks';
 import TaskList from '../components/TaskList';
 import CreateTask from '../components/CreateTask';
 import withAuth from '../utils/withAuth';
-import { useRouter } from 'next/router';
-import '../src/app/globals.css';
+import { useRouter } from 'next/router'; 
 
 const Dashboard = () => {
     const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus } = useTasks();
