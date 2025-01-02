@@ -68,11 +68,30 @@ const useTasks = () => {
     }
   };
 
+  const updateTaskDescription = async (id, newDescription) => {
+    try {
+      const token = localStorage.getItem('token');
+      const taskToUpdate = tasks.find((task) => task._id === id);
+      const updatedTask = { ...taskToUpdate, description: newDescription };
+  
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, updatedTask, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task._id === id ? updatedTask : task))
+      );
+    } catch (error) {
+      console.error('Erro ao atualizar a descrição da tarefa:', error);
+    }
+  };
+  
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  return { tasks, loading, error, addTask, deleteTask, toggleTaskStatus };
+  return { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTaskDescription };
 };
 
 export default useTasks;
