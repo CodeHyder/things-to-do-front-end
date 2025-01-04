@@ -29,7 +29,6 @@ const CreateTask = ({ addTask }) => {
           <input
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
             className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
           />
         </div>

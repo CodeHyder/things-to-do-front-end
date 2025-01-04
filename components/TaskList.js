@@ -21,7 +21,7 @@ const TaskList = ({ tasks, loading, error, onDelete, onToggleStatus, onUpdateDes
           task={task}
           onDelete={onDelete}
           onToggleStatus={onToggleStatus}
-          onUpdateDescription ={onUpdateDescription}
+          onUpdateDescription={onUpdateDescription}
         />
       ))}
     </ul>

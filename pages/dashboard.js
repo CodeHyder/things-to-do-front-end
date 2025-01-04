@@ -5,7 +5,7 @@ import withAuth from '../utils/withAuth';
 import { useRouter } from 'next/router'; 
 
 const Dashboard = () => {
-    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTaskDescription  } = useTasks();
+    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask  } = useTasks();
     const router = useRouter();
 
     const logout = () => {
@@ -32,7 +32,7 @@ const Dashboard = () => {
                     error={error}
                     onDelete={deleteTask}
                     onToggleStatus={toggleTaskStatus}
-                    onUpdateDescription={updateTaskDescription}
+                    onUpdateDescription={updateTask}
                 />
             </div>
            

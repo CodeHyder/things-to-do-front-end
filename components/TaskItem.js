@@ -1,29 +1,40 @@
 import { useState } from 'react';
 
 
-const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateDescription  }) => {
+const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateDescription }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(task.description);
+  const [newTitle, setNewTitle] = useState(task.title);
 
   const handleSave = () => {
-    onUpdateDescription(task._id, newDescription);
+    onUpdateDescription(task._id, newDescription, newTitle);
     setIsEditing(false);
-  };
-
+  }; 
   return (
     <li className="flex justify-between items-center bg-gray-50 p-4 rounded-md shadow-sm mb-3">
       <div>
-        <h3 className="text-lg font-semibold text-gray-800">{task.title}</h3>
+
         {isEditing ? (
-          <input
-            type="text"
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-            className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
-          />
+          <>
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+            />
+            <input
+              type="text"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+              className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+            />
+          </>
         ) : (
-          <p className="text-gray-600">{task.description}</p>
+          <>
+            <h3 className="text-lg font-semibold text-gray-800">{task.title}</h3>
+            <p className="text-gray-600">{task.description}</p>
+          </>
         )}
       </div>
 
