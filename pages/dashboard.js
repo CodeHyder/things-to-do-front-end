@@ -3,9 +3,10 @@ import TaskList from '../components/TaskList';
 import CreateTask from '../components/CreateTask';
 import withAuth from '../utils/withAuth';
 import { useRouter } from 'next/router'; 
+import { useEffect } from 'react';
 
 const Dashboard = () => {
-    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder } = useTasks();
+    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder, fetchTasks } = useTasks();
     const router = useRouter();
 
     const logout = () => {
@@ -14,6 +15,10 @@ const Dashboard = () => {
             router.replace('/login');
         }
     }
+
+    useEffect(() => {
+        fetchTasks();
+      }, []);
 
     return (
         

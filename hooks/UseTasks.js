@@ -99,11 +99,7 @@ const useTasks = () => {
     }
   };
 
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  return { tasks, setTasks,   loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, updateTaskOrder };
+  return { tasks, setTasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, updateTaskOrder, fetchTasks };
 };
 
 export default useTasks;
