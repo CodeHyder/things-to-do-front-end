@@ -1,6 +1,37 @@
 import TaskItem from "./TaskItem";
+import { useRef, useEffect } from "react";
+import Sortable from "sortablejs";
 
-const TaskList = ({ tasks, loading, error, onDelete, onToggleStatus, onUpdateDescription  }) => {
+const TaskList = ({ tasks, setTasks, loading, error, onDelete, onToggleStatus, onUpdateTask, updateTaskOrder }) => {
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    if (listRef.current) {
+      
+      const sortable = new Sortable(listRef.current, {
+        animation: 150,
+        onEnd: (evt) => {
+          const updatedTasks = [...tasks];
+          const [movedTask] = updatedTasks.splice(evt.oldIndex, 1);
+          updatedTasks.splice(evt.newIndex, 0, movedTask);
+
+          setTasks(updatedTasks); 
+          const tasksForAPI = updatedTasks.map((task, index) => ({
+            _id: task._id,
+            position: index,
+          }));
+          
+          updateTaskOrder(tasksForAPI); 
+        },
+      });
+
+      return () => sortable.destroy();
+    }
+  }, [tasks, setTasks]);
+  
+ 
+
+
   if (loading) {
     return <p className="text-gray-500">Carregando tarefas...</p>;
   }
@@ -14,14 +45,14 @@ const TaskList = ({ tasks, loading, error, onDelete, onToggleStatus, onUpdateDes
   }
 
   return (
-    <ul className="space-y-3">
+    <ul ref={listRef} className="space-y-3">
       {tasks.map((task) => (
         <TaskItem
           key={`task-${task._id}`}
           task={task}
           onDelete={onDelete}
           onToggleStatus={onToggleStatus}
-          onUpdateDescription={onUpdateDescription}
+          onUpdateTask={onUpdateTask}
         />
       ))}
     </ul>

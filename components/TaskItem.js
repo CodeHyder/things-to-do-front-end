@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 
-const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateDescription }) => {
+const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(task.description);
   const [newTitle, setNewTitle] = useState(task.title);
 
   const handleSave = () => {
-    onUpdateDescription(task._id, newDescription, newTitle);
+    onUpdateTask(task._id, newDescription, newTitle);
     setIsEditing(false);
   }; 
   return (
@@ -25,7 +25,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateDescription }) => {
             />
             <input
               type="text"
-              value={newDescription}
+              value={newDescription === '' ? setNewDescription(' ') : newDescription }
               onChange={(e) => setNewDescription(e.target.value)}
               className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
             />
