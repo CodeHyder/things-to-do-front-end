@@ -5,7 +5,7 @@ import withAuth from '../utils/withAuth';
 import { useRouter } from 'next/router'; 
 
 const Dashboard = () => {
-    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask  } = useTasks();
+    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder } = useTasks();
     const router = useRouter();
 
     const logout = () => {
@@ -27,12 +27,14 @@ const Dashboard = () => {
                 <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h1>
                 <CreateTask addTask={addTask} />
                 <TaskList
+                    onUpdateTask={updateTask}
                     tasks={tasks}
+                    setTasks={setTasks}
                     loading={loading}
                     error={error}
                     onDelete={deleteTask}
-                    onToggleStatus={toggleTaskStatus}
-                    onUpdateDescription={updateTask}
+                    onToggleStatus={toggleTaskStatus} 
+                    updateTaskOrder={updateTaskOrder}
                 />
             </div>
            

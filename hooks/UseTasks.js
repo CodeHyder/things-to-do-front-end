@@ -86,12 +86,24 @@ const useTasks = () => {
     }
   };
 
+  const updateTaskOrder = async (orderedTasks) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/reorder`, { tasks: orderedTasks }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+    } catch (err) {
+      console.error("Erro ao atualizar a ordem das tarefas:", err);
+    }
+  };
 
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  return { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask };
+  return { tasks, setTasks,   loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, updateTaskOrder };
 };
 
 export default useTasks;
