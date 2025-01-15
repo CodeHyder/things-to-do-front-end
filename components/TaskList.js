@@ -28,9 +28,6 @@ const TaskList = ({ tasks, setTasks, loading, error, onDelete, onToggleStatus, o
       return () => sortable.destroy();
     }
   }, [tasks, setTasks]);
-  
- 
-
 
   if (loading) {
     return <p className="text-gray-500">Carregando tarefas...</p>;

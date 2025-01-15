@@ -1,6 +1,6 @@
 # Things to Do
 
-Este repositorio é o front-end do meu TCC da pós-graduação em Desenvolvimento FUll Stack pela PUC-RS, em andamento.
+Este repositorio é o front-end do meu TCC da pós-graduação em Desenvolvimento FUll Stack pela PUC-RS. O projeto ainda está em desenvolvimento!
 
 ## Getting Started
 
