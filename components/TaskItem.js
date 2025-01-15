@@ -13,6 +13,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
     onUpdateTask(task._id, newDescription, newTitle);
     setIsEditing(false);
   };
+
   return (
     <li className="flex justify-between items-center bg-gray-50 p-4 rounded-md shadow-sm mb-3">
       <div className="flex-1">
@@ -34,29 +35,16 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
 
       <div className="flex items-center space-x-4">
         {!isEditing && (
-          // <button
-          //   onClick={() => setIsEditing(true)}
-          //   className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
-          // >
-          //   Editar
-          // </button>
-          <Button  
-          onClick={() => setIsEditing(true)}
-          color="yellow"
+          <Button
+            onClick={() => setIsEditing(true)}
+            color={'yellow'}
           >
             Editar
           </Button>
         )}
-
-        {/* <button
-          className="bg-red-500 text-white p-1 m-2 hover:bg-red-600"
+        <Button
           onClick={() => onDelete(task._id)}
-        >
-          Deletar
-        </button> */}
-        <Button  
-        onClick={() => onDelete(task._id)}
-        color="red"
+          color={'red'}
         >
           Deletar
         </Button>
