@@ -15,7 +15,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
   };
 
   return (
-    <li className="flex justify-between items-center bg-gray-50 p-4 rounded-md shadow-sm mb-3">
+    <li className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 p-4 rounded-md shadow-sm mb-3 space-y-4 sm:space-y-0 sm:space-x-4">
       <div className="flex-1">
         {isEditing ? (
           <EditTaskForm
@@ -33,7 +33,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
         )}
       </div>
 
-      <div className="flex items-center space-x-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
         {!isEditing && (
           <Button
             onClick={() => setIsEditing(true)}

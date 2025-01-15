@@ -5,19 +5,19 @@ const EditTaskForm = ({ onSubmit, newTitle, setNewTitle, newDescription, setNewD
                 type="text"
                 value={newTitle}
                 onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200 mb-2"
                 required
             />
             <input
                 type="text"
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
-                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200 mb-2"
             />
             <div className="mt-2">
                 <button
                     type="submit"
-                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-2 py-1 w-24 hover:bg-blue-600"
                 >
                     Salvar
                 </button>
