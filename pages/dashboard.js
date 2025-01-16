@@ -1,9 +1,9 @@
-import useTasks from '../hooks/UseTasks';
-import TaskList from '../components/TaskList';
+ import TaskList from '../components/TaskList';
 import CreateTask from '../components/CreateTask';
 import withAuth from '../utils/withAuth';
 import Button from '../components/Button'; 
 import useUser from '../hooks/useUser';
+import useTasks from '../hooks/useTasks';
 
 const Dashboard = () => {
     const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder } = useTasks();
