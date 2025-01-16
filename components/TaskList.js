@@ -2,7 +2,7 @@ import TaskItem from "./TaskItem";
 import { useRef, useEffect } from "react";
 import Sortable from "sortablejs";
 
-const TaskList = ({ tasks, setTasks, loading, error, onDelete, onToggleStatus, onUpdateTask, updateTaskOrder }) => {
+const TaskList = ({ tasks, setTasks, loading, error, onDelete, onToggleStatus, onUpdateTask, onUpdateTaskOrder }) => {
   const listRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const TaskList = ({ tasks, setTasks, loading, error, onDelete, onToggleStatus, o
             position: index,
           }));
           
-          updateTaskOrder(tasksForAPI); 
+          onUpdateTaskOrder(tasksForAPI); 
         },
       });
 

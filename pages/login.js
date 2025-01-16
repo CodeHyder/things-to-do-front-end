@@ -14,8 +14,9 @@ export default function Login() {
 
     try {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/login`, { email, password });
-      const { token } = response.data;
-      localStorage.setItem('token', token);
+      const { token, userId } = response.data;
+      localStorage.setItem('token', token);  
+      localStorage.setItem('userId', userId); 
       router.replace('/dashboard');
     } catch (error) {
       setErrorMessage(error.response?.data?.message || 'Erro ao realizar login.');
