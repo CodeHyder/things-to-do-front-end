@@ -37,14 +37,14 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
         {!isEditing && (
           <Button
             onClick={() => setIsEditing(true)}
-            color={'yellow'}
+            className={"bg-red-500 text-white p-1 m-2 hover:bg-red-600 w-24 mx-0"}
           >
             Editar
           </Button>
         )}
         <Button
           onClick={() => onDelete(task._id)}
-          color={'red'}
+          className={'bg-yellow-500 text-white p-1 m-2 hover:bg-yellow-600 w-24 mx-0  '}
         >
           Deletar
         </Button>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 const CreateTask = ({ addTask }) => {
   const [title, setTitle] = useState('');
@@ -32,9 +33,11 @@ const CreateTask = ({ addTask }) => {
             className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
           />
         </div>
-        <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition my-7" type="submit">
+        <Button
+          className={"w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition my-7"}
+          type="submit">
           Criar Tarefa
-        </button>
+        </Button>
       </form>
     </div>
   );
