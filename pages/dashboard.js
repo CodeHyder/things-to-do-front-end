@@ -21,7 +21,6 @@ const Dashboard = () => {
     return (
 
         <div className="min-h-screen bg-gray-100 p-6">
-            <h1 className='text-3xl font-bold text-gray-800 mb-6 text-center'>Bem vindo {username}</h1>
             <Button
                 onClick={() => logout()}
                 className="bg-black text-white hover:bg-black hover:bg-opacity-80 cursor-pointer rounded-none px-4 py-2 w-24 h-10 font-bold text-sm mb-6"
@@ -29,6 +28,8 @@ const Dashboard = () => {
             >
                 Sair
             </Button>
+            <h1 className='text-3xl font-bold text-gray-800 mb-6 text-center'>Bem vindo {username}</h1>
+
             <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h2>
                 <CreateTask addTask={addTask} />

@@ -1,18 +1,17 @@
+import Input from "./Input";
+
 const EditTaskForm = ({ onSubmit, newTitle, setNewTitle, newDescription, setNewDescription }) => {
     return (
         <form onSubmit={onSubmit} className="space-y-2">
-            <input
-                type="text"
+            <Input 
                 value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200 mb-2"
-                required
+                onChange={(e) => setNewTitle(e.target.value)} 
+                required={true}
             />
-            <input
-                type="text"
+            <Input 
                 value={newDescription}
                 onChange={(e) => setNewDescription(e.target.value)}
-                className="w-full p-1 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200 mb-2"
+                className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
             />
             <div className="mt-2">
                 <button

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -30,30 +32,28 @@ export default function Login() {
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-gray-700 font-medium mb-2">Email:</label>
-            <input
+            <Input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+              required 
             />
           </div>
           <div>
             <label className="block text-gray-700 font-medium mb-2">Senha:</label>
-            <input
+            <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+              required 
             />
           </div>
           {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-          <button
+          <Button
             type="submit"
             className="w-full bg-black text-white hover:bg-black hover:bg-opacity-80 cursor-pointer rounded-none px-4 py-2 font-bold text-sm">
             Entrar
-          </button>
+          </Button>
         </form>
       </div>
     </div>

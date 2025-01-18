@@ -9,8 +9,9 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
   const [newDescription, setNewDescription] = useState(task.description);
   const [newTitle, setNewTitle] = useState(task.title);
 
-  const handleSave = () => {
-    onUpdateTask(task._id, newDescription, newTitle);
+  const handleSave = async (e) => {
+    e.preventDefault();
+    await onUpdateTask(task._id, newDescription, newTitle);
     setIsEditing(false);
   };
 
@@ -37,14 +38,14 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
         {!isEditing && (
           <Button
             onClick={() => setIsEditing(true)}
-            className={"bg-red-500 text-white p-1 m-2 hover:bg-red-600 w-24 mx-0"}
+            className={"bg-yellow-500 text-white p-1 m-2 hover:bg-yellow-600 w-24 mx-0"}
           >
             Editar
           </Button>
         )}
         <Button
           onClick={() => onDelete(task._id)}
-          className={'bg-yellow-500 text-white p-1 m-2 hover:bg-yellow-600 w-24 mx-0  '}
+          className={'bg-red-500 text-white p-1 m-2 hover:bg-red-600 w-24 mx-0  '}
         >
           Deletar
         </Button>

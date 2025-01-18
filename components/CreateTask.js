@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
+import Input from "./Input";
 
 const CreateTask = ({ addTask }) => {
   const [title, setTitle] = useState('');
@@ -17,20 +18,17 @@ const CreateTask = ({ addTask }) => {
       <form onSubmit={handleSubmit}>
         <div>
           <label className="block text-gray-700 font-medium mb-2">Título:</label>
-          <input
-            type="text"
+          <Input 
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            required
-            className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+            required={true}
           />
         </div>
         <div>
           <label className="block text-gray-700 font-medium mb-2">Descrição:</label>
-          <input
+          <Input
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border rounded-md text-gray-800 focus:outline-none focus:ring focus:ring-blue-200"
+            onChange={(e) => setDescription(e.target.value)}  
           />
         </div>
         <Button
