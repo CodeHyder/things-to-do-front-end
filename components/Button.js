@@ -1,9 +1,10 @@
-const Button = ({ children, onClick, className, type = 'button', ...props }) => {
+const Button = ({ children, onClick, className, type = 'button', disabled=false, ...props }) => {
     return (
         <button
-            className={className}
+            className={`${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
             onClick={onClick}
             type={type}
+            disable={disabled}
             {...props}
         >
             {children}

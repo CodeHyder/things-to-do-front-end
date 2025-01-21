@@ -1,42 +1,25 @@
 import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import TaskForm from "./TaskForm";
 
 const CreateTask = ({ addTask }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await addTask({ title, description });
-    setTitle('');
-    setDescription('');
+  const handleCreate = async ({ title, description }) => {
+    setLoading(true);
+    try {
+      await addTask({ title, description });
+    } finally{
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Título:</label>
-          <Input 
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required={true}
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Descrição:</label>
-          <Input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}  
-          />
-        </div>
-        <Button
-          className={"w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition my-7"}
-          type="submit">
-          Criar Tarefa
-        </Button>
-      </form>
+    <div className="mb-5">
+      <TaskForm
+        onSubmit={handleCreate}
+        submitButtonText="Criar Tarefa"
+        loading={loading}
+      />
     </div>
   );
 };

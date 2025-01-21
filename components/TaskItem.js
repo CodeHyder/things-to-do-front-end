@@ -1,30 +1,26 @@
-import { useState } from 'react';
-import EditTaskForm from './EditTaskForm';
+import { useState } from 'react'; 
 import Checkbox from './Checkbox';
 import Button from './Button';
+import TaskForm from './TaskForm';
 
 const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [newDescription, setNewDescription] = useState(task.description);
-  const [newTitle, setNewTitle] = useState(task.title);
+  const [isEditing, setIsEditing] = useState(false); 
 
-  const handleSave = async (e) => {
-    e.preventDefault();
-    await onUpdateTask(task._id, newDescription, newTitle);
+  const handleUpdate = async ({ title, description }) => {
+    await onUpdateTask(task._id, description, title);
     setIsEditing(false);
   };
 
   return (
     <li className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-gray-50 p-4 rounded-md shadow-sm mb-3 space-y-4 sm:space-y-0 sm:space-x-4">
       <div className="flex-1">
-        {isEditing ? (
-          <EditTaskForm
-            onSubmit={handleSave}
-            newTitle={newTitle}
-            setNewTitle={setNewTitle}
-            newDescription={newDescription}
-            setNewDescription={setNewDescription}
+        {isEditing ? ( 
+          <TaskForm
+            initialTitle={task.title}
+            initialDescription={task.description}
+            onSubmit={handleUpdate}
+            submitButtonText="Salvar"
           />
         ) : (
           <>
