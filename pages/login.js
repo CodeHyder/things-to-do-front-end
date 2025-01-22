@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import Link from 'next/link';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -55,6 +56,7 @@ export default function Login() {
             Entrar
           </Button>
         </form>
+        <Link href="/register">Ainda não tem conta? Registre-se agora :)</ Link>
       </div>
     </div>
   );
