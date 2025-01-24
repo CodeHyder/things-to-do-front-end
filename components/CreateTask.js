@@ -1,16 +1,9 @@
-import { useState } from "react";
-import TaskForm from "./TaskForm";
+ import TaskForm from "./TaskForm";
 
-const CreateTask = ({ addTask }) => {
-  const [loading, setLoading] = useState(false);
+const CreateTask = ({ addTask, onTaskLoading }) => { 
 
   const handleCreate = async ({ title, description }) => {
-    setLoading(true);
-    try {
       await addTask({ title, description });
-    } finally{
-      setLoading(false);
-    }
   };
 
   return (
@@ -18,7 +11,7 @@ const CreateTask = ({ addTask }) => {
       <TaskForm
         onSubmit={handleCreate}
         submitButtonText="Criar Tarefa"
-        loading={loading}
+        loading={onTaskLoading}
       />
     </div>
   );

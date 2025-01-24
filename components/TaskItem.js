@@ -3,7 +3,7 @@ import Checkbox from './Checkbox';
 import Button from './Button';
 import TaskForm from './TaskForm';
 
-const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
+const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask, ontaskLoading }) => {
 
   const [isEditing, setIsEditing] = useState(false); 
 
@@ -20,6 +20,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
             initialTitle={task.title}
             initialDescription={task.description}
             onSubmit={handleUpdate}
+            loading={ontaskLoading}
             submitButtonText="Salvar"
           />
         ) : (
@@ -42,6 +43,7 @@ const TaskItem = ({ task, onDelete, onToggleStatus, onUpdateTask }) => {
         <Button
           onClick={() => onDelete(task._id)}
           className={'bg-red-500 text-white p-1 m-2 hover:bg-red-600 w-24 mx-0  '}
+          disabled={ontaskLoading}
         >
           Deletar
         </Button>

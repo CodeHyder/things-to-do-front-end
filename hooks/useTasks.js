@@ -4,6 +4,7 @@ import axios from 'axios';
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [taskLoading, setTaskLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchTasks = async () => {
@@ -25,6 +26,7 @@ const useTasks = () => {
   };
 
   const addTask = async (taskData) => {
+    setTaskLoading(true);
     try {
       const token = localStorage.getItem('token');
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, taskData, {
@@ -34,10 +36,13 @@ const useTasks = () => {
       setTasks((prevTasks) => [...prevTasks, response.data]);
     } catch (error) {
       console.error('Erro ao adicionar tarefa:', error);
+    } finally {
+      setTaskLoading(false);
     }
   };
 
   const deleteTask = async (id) => {
+    setTaskLoading(true);
     try {
       const token = localStorage.getItem('token');
       await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, {
@@ -47,7 +52,9 @@ const useTasks = () => {
       setTasks((prevTasks) => prevTasks.filter((task) => task._id !== id));
     } catch (error) {
       console.error('Erro ao deletar a tarefa:', error);
-    }
+    } finally {
+      setTaskLoading(false);
+    }	
   };
 
   const toggleTaskStatus = async (id) => {
@@ -69,6 +76,7 @@ const useTasks = () => {
   };
 
   const updateTask = async (id, newDescription, newTitle) => {
+    setTaskLoading(true);
     try {
       const token = localStorage.getItem('token');
       const taskToUpdate = tasks.find((task) => task._id === id);
@@ -83,6 +91,8 @@ const useTasks = () => {
       );
     } catch (error) {
       console.error('Erro ao atualizar a descrição da tarefa:', error);
+    } finally {
+      setTaskLoading(false);
     }
   };
 
@@ -99,11 +109,11 @@ const useTasks = () => {
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     fetchTasks();
   }, []);
 
-  return { tasks, setTasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, updateTaskOrder, fetchTasks };
+  return { tasks, setTasks, loading, taskLoading, error, addTask, deleteTask, toggleTaskStatus, updateTask, updateTaskOrder, fetchTasks };
 };
 
 export default useTasks;

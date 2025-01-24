@@ -6,7 +6,7 @@ import useUser from '../hooks/useUser';
 import useTasks from '../hooks/useTasks';
 
 const Dashboard = () => {
-    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder } = useTasks();
+    const { tasks, loading, error, addTask, deleteTask, toggleTaskStatus, updateTask, setTasks, updateTaskOrder, taskLoading } = useTasks();
     const { username, logout, loading: userLoading, error: userError } = useUser();
 
 
@@ -32,11 +32,12 @@ const Dashboard = () => {
 
             <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
                 <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h2>
-                <CreateTask addTask={addTask} />
+                <CreateTask addTask={addTask} onTaskLoading={taskLoading}/>
                 <TaskList
                     tasks={tasks}
                     setTasks={setTasks}
                     loading={loading}
+                    taskLoading={taskLoading}
                     error={error}
                     onUpdateTask={updateTask}
                     onDelete={deleteTask}
