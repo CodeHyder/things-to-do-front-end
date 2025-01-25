@@ -29,9 +29,9 @@ const Dashboard = () => {
                 Sair
             </Button>
 
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h2>
+            <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Things to Do</h1>
             <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
-                <h1 className='text-3xl font-bold text-gray-800 mb-6 text-center'>Bem vindo {username}</h1>
+                <h2 className='text-3xl font-bold text-gray-800 mb-6 text-center'>Bem vindo {username}</h2>
                 <CreateTask addTask={addTask} onTaskLoading={taskLoading} />
                 <TaskList
                     tasks={tasks}
