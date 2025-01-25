@@ -54,7 +54,7 @@ const useTasks = () => {
       console.error('Erro ao deletar a tarefa:', error);
     } finally {
       setTaskLoading(false);
-    }	
+    }
   };
 
   const toggleTaskStatus = async (id) => {
@@ -63,15 +63,25 @@ const useTasks = () => {
       const taskToUpdate = tasks.find((task) => task._id === id);
       const updatedTask = { ...taskToUpdate, completed: !taskToUpdate.completed };
 
+      setTasks((prevTasks) =>
+        prevTasks.map((task) => (task._id === id ? updatedTask : task))
+      );
+      
       await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, updatedTask, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      setTasks((prevTasks) =>
-        prevTasks.map((task) => (task._id === id ? updatedTask : task))
-      );
+
     } catch (error) {
       console.error('Erro ao atualizar status da tarefa:', error);
+
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === id
+            ? { ...task, completed: !task.completed }  
+            : task
+        )
+      );
     }
   };
 
