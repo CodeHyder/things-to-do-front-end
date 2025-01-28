@@ -4,7 +4,7 @@ import axios from 'axios';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-export default function Login() {
+export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
@@ -16,16 +16,15 @@ export default function Login() {
         setErrorMessage('');
 
         try {
-            console.log({ username, email, password });
             await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/users/register`, { email, password, username });
-            console.log({ username, email, password });
-
             router.replace('/login');
         } catch (error) {
-            setErrorMessage(error.response?.data?.error || 'Erro ao realizar login.');
-            console.log(error.response)
+            setErrorMessage(error.response.data.error); 
         }
     };
+
+    console.log('erro:', errorMessage)
+    
 
     return (
         <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
@@ -59,7 +58,6 @@ export default function Login() {
                             required
                         />
                     </div>
-
                     {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                     <Button
                         type="submit"
