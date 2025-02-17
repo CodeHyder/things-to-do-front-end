@@ -27,16 +27,22 @@ const TaskForm = ({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Título:</label>
+        <label
+          htmlFor="title"
+          className="block text-gray-700 font-medium mb-2">
+          Título:
+        </label>
         <Input
+          id={"title"}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           required
         />
       </div>
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Descrição:</label>
+        <label htmlFor='description' className="block text-gray-700 font-medium mb-2">Descrição:</label>
         <Input
+          id={"description"}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
